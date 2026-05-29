@@ -1,6 +1,6 @@
 # Secure-IQ Automator (Reasoning Agent Core)
 
-An advanced, multi-step reasoning agent architecture engineered for the **Microsoft Agents League Hackathon 2026**. This system implements deep security sanitization layers combined with sequential logic execution, designed to integrate seamlessly with the **Microsoft Foundry IQ** intelligence layer.
+An advanced, multi-step reasoning agent architecture engineered for the **Microsoft Agents League Hackathon 2026**. This system implements deep security sanitization layers combined with sequential logic execution, designed to integrate seamlessly with the Microsoft Foundry IQ intelligence layer.
 
 ---
 
@@ -14,10 +14,10 @@ The agent processes user prompts through a strict zero-trust ingestion pipeline 
 
 ---
 
----
-
 ## 🛡️ Security & Compliance
-Our agent utilizes a **Zero-Trust Sanitization Layer** to protect against malicious injections.
+
+Our agent utilizes a Zero-Trust Sanitization Layer to protect against malicious injections.
+
 - **Credential Masking:** Automatically detects and masks API tokens, passwords, and internal IP addresses (192.168.x.x).
 - **Outbound Audit:** Every response is verified before dispatch to ensure no sensitive structural anomalies leak.
 - **Hardened Logic:** Built-in regex-based filtering prevents system-override attempts.
@@ -25,16 +25,19 @@ Our agent utilizes a **Zero-Trust Sanitization Layer** to protect against malici
 ---
 
 ## 🧠 Agent Reasoning Workflow
-The agent operates on a multi-stage cognitive pipeline designed for high-stakes enterprise telemetry.
-``bash
-## 🧠 Agent Reasoning Workflow
-1. **User Input** ➡️ **Security Sanitization** (Check for threats)
-2. ➡️ **Intent Analysis** (Identify task)
-3. ➡️ **Foundry IQ Grounding** (Fetch verified data)
-4. ➡️ **Execution Engine** (Process multi-step logic)
-5. ➡️ **Outbound Audit** (Verify safety) ➡️ **Final Response**
----
 
+The agent operates on a multi-stage cognitive pipeline designed for high-stakes enterprise telemetry.
+
+```
+User Input ➡️ Security Sanitization (Check for threats)
+➡️ Intent Analysis (Identify task)
+➡️ Foundry IQ Grounding (Fetch verified data)
+➡️ Execution Engine (Process multi-step logic)
+➡️ Outbound Audit (Verify safety)
+➡️ Final Response
+```
+
+---
 
 ## 🛠️ Tech Stack & Dependencies
 
@@ -47,13 +50,18 @@ The agent operates on a multi-stage cognitive pipeline designed for high-stakes 
 ## 🚀 Local Installation & Deployment
 
 ### 1. Clone and Navigate to the Repository
+
 ```bash
 git clone https://github.com/mansimanshu59-web/agents-league-automator.git
 cd agents-league-automator
----
+pip install -r requirements.txt
+python main.py
+```
+
 ---
 
 ## 🖥️ Agent Interface Demo
-*(Note: Ensure your screenshot is saved as assets/Screenshot_2026_0528_161648.png)*
-![Secure-IQ Dashboard](assets/Screenshot_2026_0528_161648.png)
 
+
+
+![Secure-IQ Dashboard](assets/Screenshot_2026_0528_161648.png)
