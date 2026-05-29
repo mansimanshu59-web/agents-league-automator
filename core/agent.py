@@ -11,16 +11,20 @@ class EnterpriseAgent:
         self.iq = FoundryIQ()
 
     def process_command(self, user_prompt):
+        # Step 1: Sanitization
         safe_prompt = self.security.sanitize_input(user_prompt)
-        self.logger.log_thought("Input Parsing", f"Sanitized: {safe_prompt}")
         
-        # Foundry IQ Integration (The real deal)
-        context = self.iq.get_grounded_context("DATA_RETRIEVAL_PIPELINE")
+        # Step 2: Intent Classification (Reasoning logic)
+        intent = "MITIGATION" if "patch" in safe_prompt.lower() or "fix" in safe_prompt.lower() else "INFO"
+        self.logger.log_thought("Intent Analysis", intent)
+
+        # Step 3: Grounded Context (Foundry IQ)
+        context = self.iq.get_grounded_context(intent)
         self.logger.log_thought("Grounded Intelligence", context)
-        
-        # Action Logic
-        if "patch" in safe_prompt.lower():
-            result = self.actions.run_security_scan(safe_prompt)
-            return f"REASONING_FINAL: {result} | IQ_STATUS: Verified."
+
+        # Step 4: Multi-Step Execution
+        if intent == "MITIGATION":
+            action_res = self.actions.run_security_scan(safe_prompt)
+            return f"ACTION_TAKEN: {action_res} | CONTEXT: {context}"
             
-        return f"REASONING_FINAL: Executing standard logic with context: {context}"
+        return f"REASONING_COMPLETE: Status {context}"
