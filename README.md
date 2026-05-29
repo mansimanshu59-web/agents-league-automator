@@ -9,6 +9,11 @@ The agent processes user prompts through a strict zero-trust ingestion pipeline:
 2. **Contextual Grounding (Foundry IQ):** Connects to verified enterprise knowledge graphs to fetch cited, verified telemetry, drastically reducing LLM hallucinations.
 3. **Multi-Step Execution Engine:** Runs the sanitized query through structured functional execution chains (State Management) to generate verifiable outputs.
 
+## 🏗️ System Architecture & Workflow
+![Secure-IQ Architecture](assets/architecture.png) 
+*Detailed breakdown of the multi-step reasoning and security pipeline.*
+
+
 ## 🛡️ Security & Compliance
 Our agent utilizes a **Zero-Trust Sanitization Layer**:
 - **Credential Masking:** Automatically detects and masks API tokens, passwords, and internal IP addresses.
