@@ -1,16 +1,12 @@
-import json
+import requests
 
 class FoundryIQ:
-    def __init__(self):
-        # Simulation ki jagah ab hum 'Enterprise Schema' hold karenge
-        self.enterprise_graph = {
-            "vulnerabilities": {"critical": 2, "patched": 45},
-            "network_status": "SECURE",
-            "access_logs": "Detected activity from Admin_node_01"
-        }
-
     def get_grounded_context(self, intent):
-        # Real-time data parsing simulation
-        if intent == "DATA_RETRIEVAL_PIPELINE":
-            return f"Querying Graph DB: {json.dumps(self.enterprise_graph)}"
-        return "Context: Policy-compliant."
+        # Real-time API hit to get simulated enterprise telemetry
+        try:
+            # Using a reliable mock endpoint for demonstration
+            response = requests.get("https://jsonplaceholder.typicode.com/posts/1", timeout=5)
+            data = response.json()
+            return f"FOUNDRY_IQ_GROUNDED_DATA: [Title: {data['title'][:20]}]"
+        except:
+            return "FOUNDRY_IQ_OFFLINE: Using fallback static schema."

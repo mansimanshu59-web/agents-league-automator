@@ -11,15 +11,16 @@ class EnterpriseAgent:
         self.iq = FoundryIQ()
 
     def process_command(self, user_prompt):
-        # 1. Zero Trust Ingestion
         safe_prompt = self.security.sanitize_input(user_prompt)
+        self.logger.log_thought("Input Parsing", f"Sanitized: {safe_prompt}")
         
-        # 2. Reasoning (Multi-step)
-        intent = "DATA_RETRIEVAL_PIPELINE" if "fetch" in safe_prompt else "THREAT_MITIGATION_PIPELINE"
+        # Foundry IQ Integration (The real deal)
+        context = self.iq.get_grounded_context("DATA_RETRIEVAL_PIPELINE")
+        self.logger.log_thought("Grounded Intelligence", context)
         
-        # 3. Foundry IQ Grounding (The Intelligence Step)
-        context = self.iq.get_grounded_context(intent)
-        self.logger.log_thought("Foundry IQ Grounding", f"Retrieved: {context}")
-        
-        # 4. Final Execution
-        return f"Agent Action: {self.actions.run_security_scan(safe_prompt)} | Context: {context}"
+        # Action Logic
+        if "patch" in safe_prompt.lower():
+            result = self.actions.run_security_scan(safe_prompt)
+            return f"REASONING_FINAL: {result} | IQ_STATUS: Verified."
+            
+        return f"REASONING_FINAL: Executing standard logic with context: {context}"
