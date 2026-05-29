@@ -11,20 +11,21 @@ class EnterpriseAgent:
         self.iq = FoundryIQ()
 
     def process_command(self, user_prompt):
-        # Step 1: Sanitization
         safe_prompt = self.security.sanitize_input(user_prompt)
         
-        # Step 2: Intent Classification (Reasoning logic)
-        intent = "MITIGATION" if "patch" in safe_prompt.lower() or "fix" in safe_prompt.lower() else "INFO"
-        self.logger.log_thought("Intent Analysis", intent)
-
-        # Step 3: Grounded Context (Foundry IQ)
-        context = self.iq.get_grounded_context(intent)
-        self.logger.log_thought("Grounded Intelligence", context)
-
-        # Step 4: Multi-Step Execution
-        if intent == "MITIGATION":
-            action_res = self.actions.run_security_scan(safe_prompt)
-            return f"ACTION_TAKEN: {action_res} | CONTEXT: {context}"
+        # Inference Routing Logic
+        # Agar query mein keywords kam hain, toh local simple logic
+        if len(safe_prompt.split()) < 5:
+            self.logger.log_thought("Routing", "Local/Simple Processing")
+            return f"AGENT_LOCAL: {safe_prompt} - Executed without IQ grounding."
+        
+        # Agar query complex hai, toh Foundry IQ call karo
+        else:
+            self.logger.log_thought("Routing", "Foundry IQ Grounding Required")
+            context = self.iq.get_grounded_context("COMPLEX_ENTERPRISE_QUERY")
             
-        return f"REASONING_COMPLETE: Status {context}"
+            if "patch" in safe_prompt.lower():
+                result = self.actions.run_security_scan(safe_prompt)
+                return f"REASONING_FINAL: {result} | IQ_STATUS: {context}"
+                
+            return f"REASONING_COMPLETE: {context}"
