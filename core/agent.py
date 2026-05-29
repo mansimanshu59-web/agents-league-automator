@@ -1,18 +1,21 @@
 from core.security import SecurityLayer
 from core.actions import ActionScheduler
+from core.logger import ReasoningLogger
 
 class EnterpriseAgent:
     def __init__(self):
         self.security = SecurityLayer()
         self.actions = ActionScheduler()
+        self.logger = ReasoningLogger()
 
     def process_command(self, user_prompt):
-        # 1. Zero Trust Ingestion
+        # 1. Sanitization
+        self.logger.log_thought("Security Check", "Scanning for injections...")
         safe_prompt = self.security.sanitize_input(user_prompt)
         
-        # 2. Reasoning (Multi-step Logic)
+        # 2. Decision Logic
         if "192.168" in safe_prompt:
-            action_result = self.actions.isolate_node("192.168.x.x")
-            return f"CRITICAL: {action_result}"
+            self.logger.log_thought("Threat Mitigation", "Internal IP found, triggering isolation.")
+            return self.actions.isolate_node("192.168.x.x")
         
-        return "Command executed successfully in Enterprise Fabric."
+        return "System clear, executing standard operation."
