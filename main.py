@@ -1,20 +1,16 @@
-import json
-from core.agent import AgentsLeagueCore
+from core.agent import EnterpriseAgent
 
-def main():
-    print("--- SECURE-IQ: ENTERPRISE ENGINE ACTIVE ---")
-    bot = AgentsLeagueCore()
-    
-    # Ye simulation hai 'Foundry IQ' grounding ke liye
-    test_prompts = [
-        "Fetch server schema for 192.168.1.1",
-        "Analyze security logs for unauthorized access"
+def test_harness():
+    bot = EnterpriseAgent()
+    scenarios = [
+        "Fetch server status", 
+        "Fix vulnerabilities on 192.168.1.50"
     ]
-    
-    for prompt in test_prompts:
-        print(f"\n[ANALYZING]: {prompt}")
-        result = bot.execute_workflow(prompt)
-        print(json.dumps(result, indent=2))
+    for s in scenarios:
+        print(f"\n--- TESTING SCENARIO: {s} ---")
+        result = bot.process_command(s)
+        print(f"AGENT RESPONSE: {result}")
 
 if __name__ == "__main__":
-    main()
+    test_harness()
+
