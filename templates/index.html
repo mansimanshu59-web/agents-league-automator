@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SECURE-IQ // Premium Command Interface</title>
+    <title>SECURE-IQ // Agent Core Dashboard</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #e5b300; /* Outer fallback background matching image frame shadow */
+            background: linear-gradient(135deg, #fcd116, #fcc21b);
             height: 100vh;
             display: flex;
             align-items: center;
@@ -21,171 +21,188 @@
             overflow: hidden;
         }
 
-        /* Container mimicking the exact rounded presentation layout */
-        .app-canvas {
+        /* Full Screen Canvas with Image 9 High-Energy Geometric Layout */
+        .dashboard-container {
             width: 100vw;
             height: 100vh;
-            background-color: #ffffff;
+            background-color: #fcd116;
             position: relative;
             overflow: hidden;
             display: flex;
+            z-index: 2;
         }
 
-        /* === FLUID BACKGROUND ARTWORK (Cloning 53828.jpg curves) === */
-        .bg-curve-yellow-bottom {
+        /* === GEOMETRIC BACKGROUND SHAPES (Exact Replica of 53874.jpg) === */
+        .geo-layer {
             position: absolute;
-            bottom: -30%;
-            left: 15%;
-            width: 750px;
-            height: 750px;
-            background: radial-gradient(circle, #ffcc00 20%, #ffdf43 80%);
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .bg-curve-top-dark {
-            position: absolute;
-            top: -25%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background-color: #141619;
-            border-radius: 50%;
-            z-index: 1;
-            opacity: 0.9;
-        }
-
-        /* === LEFT SIDE PANEL (The iconic bold dark fluid wing) === */
-        .left-dark-panel {
-            position: relative;
-            width: 38%;
+            width: 100%;
             height: 100%;
-            background-color: #0c0d0f;
-            padding: 45px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .orange-bar {
+            position: absolute;
+            background-color: #f28e2b;
+            border-radius: 50px;
+            transform: rotate(-35deg);
+        }
+        .ob-1 { width: 120px; height: 400px; top: -120px; right: 35%; }
+        .ob-2 { width: 80px; height: 320px; bottom: -60px; left: 38%; }
+        .ob-3 { width: 110px; height: 300px; top: 20%; right: 5%; }
+
+        .white-bar {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50px;
+            transform: rotate(-35deg);
+        }
+        .wb-1 { width: 90px; height: 350px; top: -100px; right: 24%; }
+        .wb-2 { width: 70px; height: 260px; bottom: -40px; left: 28%; }
+
+        .dark-corner-block {
+            position: absolute;
+            top: -150px;
+            right: -100px;
+            width: 300px;
+            height: 400px;
+            background-color: #1a1c23;
+            border-radius: 0 0 120px 120px;
+            transform: rotate(-35deg);
+            z-index: 2;
+        }
+
+        /* Dot Matrices and Rings matching Image 9 layout */
+        .dot-matrix-grid {
+            position: absolute;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .dmg-1 { top: 22%; right: 28%; }
+        .dmg-2 { bottom: 25%; left: 45%; }
+        .g-dot { width: 5px; height: 5px; background-color: #1a1c23; border-radius: 50%; opacity: 0.6; }
+
+        .geo-ring {
+            position: absolute;
+            border: 3px solid #1a1c23;
+            border-radius: 50%;
+        }
+        .rn-1 { width: 50px; height: 50px; top: 12%; right: 12%; border-color: #f28e2b; }
+        .rn-2 { width: 40px; height: 40px; top: -15px; right: 20%; border-color: #1a1c23; }
+        .rn-3 { width: 45px; height: 45px; bottom: 10%; right: 15%; border-color: #1a1c23; }
+
+        /* === INTERACTIVE DASHBOARD CORE OVERLAY === */
+        .dashboard-content-mask {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            display: flex;
+            padding: 50px 60px;
+            justify-content: space-between;
+        }
+
+        /* Left Control Panel Container */
+        .control-side-deck {
+            width: 42%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            z-index: 3;
-            border-radius: 0 0 180px 0; /* Creates that unique sweeping bottom scoop */
-            box-shadow: 15px 0 40px rgba(0,0,0,0.2);
+            height: 100%;
         }
 
-        /* Left Accent Dots like the original image slider controls */
-        .left-margin-dots {
-            position: absolute;
-            left: 20px;
-            top: 45%;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .dot-metric {
-            width: 8px;
-            height: 8px;
-            background-color: rgba(255,255,255,0.3);
-            border-radius: 50%;
-        }
-        .dot-metric.active { background-color: #ffcc00; }
-
-        .brand-header {
+        .brand-logo-node {
+            font-size: 22px;
+            font-weight: 900;
+            color: #1a1c23;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .brand-logo-icon {
-            width: 22px;
-            height: 14px;
-            background-color: #ffcc00;
+        .brand-icon-skew {
+            width: 24px;
+            height: 16px;
+            background-color: #1a1c23;
             transform: skewX(-20deg);
-            border-radius: 2px;
-        }
-        .brand-name {
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 16px;
-            letter-spacing: 0.5px;
         }
 
-        .main-heading-zone {
-            margin-top: -20px;
-            border-left: 2px solid #ffcc00;
-            padding-left: 15px;
-        }
-        .main-heading-zone h1 {
-            color: #ffffff;
-            font-size: 40px;
-            font-weight: 800;
+        .main-hero-title-block h1 {
+            color: #1a1c23;
+            font-size: 46px;
+            font-weight: 850;
             line-height: 1.1;
-            text-transform: uppercase;
             letter-spacing: -0.5px;
+            text-transform: uppercase;
         }
 
-        /* Input Deck styling */
-        .input-deck {
-            background-color: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Functional Prompt Control Deck Box */
+        .interactive-prompt-card {
+            background-color: rgba(26, 28, 35, 0.96);
+            border-left: 4px solid #f28e2b;
             border-radius: 8px;
-            padding: 14px 18px;
+            padding: 18px;
             margin-bottom: 20px;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
         }
-        .input-deck-label {
-            font-size: 9px;
-            color: #ffcc00;
+        .prompt-header-tag {
+            font-size: 10px;
+            color: #f28e2b;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
-        .core-input-node {
+        .prompt-input-field {
             width: 100%;
             background: transparent;
             border: none;
             color: #ffffff;
-            font-size: 15px;
+            font-size: 16px;
             outline: none;
+            font-weight: 500;
         }
 
-        .action-pill-button {
-            width: 100%;
-            background-color: #ffffff;
-            color: #0c0d0f;
+        /* High-Action Capsule Button matching image 9 styling */
+        .action-capsule-trigger {
+            background-color: #1a1c23;
+            color: #ffffff;
             border: none;
-            padding: 15px;
+            padding: 16px 32px;
             border-radius: 30px;
             font-weight: 700;
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
         }
-        .action-pill-button:hover {
-            background-color: #ffcc00;
+        .action-capsule-trigger:hover {
+            background-color: #ffffff;
+            color: #1a1c23;
             transform: translateY(-2px);
         }
 
-        .status-footer-badge {
-            background-color: rgba(255,255,255,0.05);
-            padding: 8px 16px;
-            border-radius: 20px;
+        .status-badge-capsule {
+            background-color: #1a1c23;
+            padding: 10px 20px;
+            border-radius: 25px;
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.5px;
             text-transform: uppercase;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            align-self: flex-start;
             color: #ffffff;
-            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            align-self: flex-start;
+            letter-spacing: 0.5px;
         }
-        .status-neon-dot {
+        .status-pulse-indicator {
             width: 8px;
             height: 8px;
             background-color: #00ff66;
@@ -193,249 +210,214 @@
             box-shadow: 0 0 10px #00ff66;
         }
 
-        /* === RIGHT CONTENT AREA (The Premium Canvas) === */
-        .right-fluid-canvas {
-            width: 62%;
-            height: 100%;
-            padding: 45px;
+        /* Right Telemetry / Output Viewport Panel */
+        .telemetry-side-deck {
+            width: 54%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            z-index: 2;
-            position: relative;
+            align-items: flex-end;
+            height: 100%;
         }
 
-        /* Top Minimalist Navigation Bar */
-        .top-navbar-container {
+        /* Top Modular Header Navigation (Matches Prompt Specifications) */
+        .top-nav-row {
             display: flex;
-            justify-content: flex-end;
+            gap: 35px;
             align-items: center;
-            gap: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
         }
-        .navbar-link {
+        .nav-item-node {
             font-size: 11px;
-            font-weight: 700;
-            color: #0c0d0f;
+            font-weight: 800;
+            color: #1a1c23;
             text-decoration: none;
             letter-spacing: 0.8px;
             text-transform: uppercase;
-            text-align: right;
         }
-        .burger-menu-icon {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-        }
-        .burger-line {
-            width: 18px;
-            height: 2px;
-            background-color: #0c0d0f;
-        }
+        .nav-item-node:hover { color: #ffffff; }
 
-        /* Floating Intelligence Console Card */
-        .floating-console-card {
-            background-color: rgba(12, 13, 16, 0.96);
-            border-radius: 16px;
+        /* Reasoning Agent Logic Display Console Window */
+        .terminal-monitor-card {
+            background-color: rgba(26, 28, 35, 0.98);
+            border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
             width: 100%;
-            max-width: 580px;
-            margin-left: 20px;
+            box-shadow: 0 35px 70px rgba(0,0,0,0.35);
             border: 1px solid rgba(255,255,255,0.05);
+            margin-top: 30px;
         }
-        .console-header-title {
-            font-size: 18px;
+        .terminal-header-label {
+            font-size: 16px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             color: #ffffff;
-            margin-bottom: 18px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 10px;
         }
-        .terminal-viewport {
+        .terminal-viewport-screen {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 12px;
-            line-height: 1.6;
-            height: 180px;
+            font-size: 13px;
+            line-height: 1.7;
+            height: 240px;
             overflow-y: auto;
-            color: #00ff66;
+            padding-right: 5px;
         }
-        .row-ln { margin-bottom: 5px; word-break: break-all; }
-        .color-sys { color: #00ff66; }
-        .color-usr { color: #ffcc00; }
-        .color-alert { color: #ff3333; }
-        .color-json { color: #00d2ff; font-size: 11px; white-space: pre-wrap; background: rgba(255,255,255,0.03); padding: 8px; border-radius: 4px; display: block; margin: 4px 0; }
+        .log-row { margin-bottom: 6px; word-break: break-all; }
+        .c-sys { color: #00ff66; font-weight: bold; }
+        .c-audit { color: #8b949e; }
+        .c-user { color: #ffcc00; }
+        .c-sec { color: #ff3c3c; }
 
-        /* Bottom Ecosystem Action Group */
-        .bottom-badge-dock {
+        /* Footer Technology Badge Cluster Dock */
+        .badge-ecosystem-dock {
             display: flex;
-            justify-content: flex-end;
             gap: 12px;
-            align-items: center;
+            margin-top: 20px;
         }
-        .pill-badge-node {
-            background-color: rgba(12, 13, 15, 0.06);
-            border: 1px solid rgba(12, 13, 15, 0.1);
-            padding: 8px 16px;
+        .eco-capsule-badge {
+            background-color: rgba(26, 28, 35, 0.1);
+            border: 1px solid rgba(26, 28, 35, 0.2);
+            padding: 8px 18px;
             border-radius: 6px;
             font-size: 11px;
-            font-weight: 700;
-            color: #0c0d0f;
+            font-weight: 800;
+            color: #1a1c23;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            letter-spacing: 0.5px;
         }
-
-        /* Right slide handle block like original image */
-        .right-slide-handle {
-            position: absolute;
-            right: 0;
-            top: 40%;
-            height: 120px;
-            width: 24px;
-            background-color: #0c0d0f;
-            border-radius: 20px 0 0 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-        .handle-dot {
-            width: 4px;
-            height: 4px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            opacity: 0.4;
-        }
-        .handle-dot.active { opacity: 1; background-color: #ffcc00; }
     </style>
 </head>
 <body>
 
-    <div class="app-canvas">
+    <div class="dashboard-container">
         
-        <div class="left-margin-dots">
-            <div class="dot-metric active"></div>
-            <div class="dot-metric"></div>
-            <div class="dot-metric"></div>
-        </div>
+        <div class="geo-layer">
+            <div class="dark-corner-block"></div>
+            <div class="orange-bar ob-1"></div>
+            <div class="orange-bar ob-2"></div>
+            <div class="orange-bar ob-3"></div>
+            <div class="white-bar wb-1"></div>
+            <div class="white-bar wb-2"></div>
+            <div class="geo-ring rn-1"></div>
+            <div class="geo-ring rn-2"></div>
+            <div class="geo-ring rn-3"></div>
 
-        <div class="left-dark-panel">
-            <div class="brand-header">
-                <div class="brand-logo-icon"></div>
-                <div class="brand-name">SECURE-IQ</div>
+            <div class="dot-matrix-grid dmg-1">
+                <div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div>
+                <div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div>
+                <div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div>
             </div>
-
-            <div class="main-heading-zone">
-                <h1>Agent<br>Command<br>Interface</h1>
-            </div>
-
-            <div>
-                <div class="input-deck">
-                    <div class="input-deck-label">⚡ Enter Enterprise Command Prompt</div>
-                    <input type="text" id="pipelineInput" class="core-input-node" placeholder="Type custom logic..." onkeydown="if(event.key === 'Enter') triggerWorkflowPipeline()">
-                </div>
-
-                <button class="action-pill-button" onclick="triggerWorkflowPipeline()">
-                    🚀 Trigger Agent Workflow
-                </button>
-            </div>
-
-            <div class="status-footer-badge">
-                <div class="status-neon-dot"></div>
-                Status: Secure // Active
+            <div class="dot-matrix-grid dmg-2">
+                <div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div>
+                <div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div>
+                <div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div><div class="g-dot"></div>
             </div>
         </div>
 
-        <div class="bg-curve-yellow-bottom"></div>
-        <div class="bg-curve-top-dark"></div>
-
-        <div class="right-fluid-canvas">
+        <div class="dashboard-content-mask">
             
-            <div class="top-navbar-container">
-                <a href="#" class="navbar-link">ABOUT<br>OVERVIEW</a>
-                <a href="#" class="navbar-link">PROCESS WORKFLOW<br>VIEWER</a>
-                <a href="#" class="navbar-link">GET IN TOUCH<br>CONFIGURATION</a>
-                <div class="burger-menu-icon">
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
+            <div class="control-side-deck">
+                <div class="brand-logo-node">
+                    <div class="brand-icon-skew"></div>
+                    SECURE-IQ
+                </div>
+
+                <div class="main-hero-title-block">
+                    <h1>AGENT<br>COMMAND<br>INTERFACE</h1>
+                </div>
+
+                <div>
+                    <div class="interactive-prompt-card">
+                        <div class="prompt-header-tag">⚡ ENTER ENTERPRISE COMMAND PROMPT</div>
+                        <input type="text" id="agentInputNode" class="prompt-input-field" value="Hello" onkeydown="if(event.key === 'Enter') dispatchAgentWorkflowPipeline()">
+                    </div>
+
+                    <button class="action-capsule-trigger" onclick="dispatchAgentWorkflowPipeline()">
+                        🚀 TRIGGER AGENT WORKFLOW
+                    </button>
+                </div>
+
+                <div class="status-badge-capsule">
+                    <div class="status-pulse-indicator"></div>
+                    STATUS: SECURE // ACTIVE
                 </div>
             </div>
 
-            <div class="floating-console-card">
-                <div class="console-header-title">Intelligence Node Logs</div>
-                <div class="terminal-viewport" id="logsTerminal">
-                    <div class="row-ln color-sys">MS_FOUNDRY_IQ.</div>
-                    <div class="row-ln color-sys">[16:04:18] [AUDIT] Standby mode active. Awaiting user input pipeline dispatch...</div>
+            <div class="telemetry-side-deck">
+                
+                <div class="top-nav-row">
+                    <a href="#" class="nav-item-node">PROCESS WORKFLOW VIEWER</a>
+                    <a href="#" class="nav-item-node">GET IN TOUCH CONFIGURATION</a>
                 </div>
+
+                <div class="terminal-monitor-card">
+                    <div class="terminal-header-label">INTELLIGENCE NODE LOGS</div>
+                    <div class="terminal-viewport-screen" id="terminalLogsViewport">
+                        <div class="log-row c-sys">MS FOUNDRY_IQ.</div>
+                        <div class="log-row c-audit">[16:04:18] [AUDIT] Standby mode active, Awaiting user input pipeline dispatch....</div>
+                        <div class="log-row c-user">[4:16:31 PM] [USER] Dispatching Custom Command....</div>
+                        <div class="log-row c-sec">[4:16:32 PM] [SECURITY] Sanitizing incoming payload structural nodes...</div>
+                        <div class="log-row c-sys">[4:16:32 PM] [FOUNDRY_IQ] Grounded Context: Query parsed via Multi-Step Core Engine node successfully.</div>
+                    </div>
+                </div>
+
+                <div class="badge-ecosystem-dock">
+                    <div class="eco-capsule-badge">🛡️ FOUNDRY IQ</div>
+                    <div class="eco-capsule-badge">💾 WORK IQ</div>
+                    <div class="eco-capsule-badge">⚙️ FABRIC IQ</div>
+                </div>
+
             </div>
 
-            <div class="bottom-badge-dock">
-                <div class="pill-badge-node">🛡️ Foundry IQ</div>
-                <div class="pill-badge-node">💾 Work IQ</div>
-                <div class="pill-badge-node">🔀 Fabric IQ</div>
-            </div>
-        </div>
-
-        <div class="right-slide-handle">
-            <div class="handle-dot active"></div>
-            <div class="handle-dot"></div>
-            <div class="handle-dot"></div>
         </div>
 
     </div>
 
     <script>
-        function logLineToView(text, layoutClass) {
-            const viewport = document.getElementById('logsTerminal');
-            const element = document.createElement('div');
-            element.className = `row-ln ${layoutClass}`;
-            
-            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
-            
-            if (layoutClass === 'color-json') {
-                element.innerText = text;
-            } else {
-                element.innerText = `[${timestamp}] ${text}`;
-            }
-            
-            viewport.appendChild(element);
+        function pushLineToViewport(text, layoutStyleClass) {
+            const viewport = document.getElementById('terminalLogsViewport');
+            const lineNode = document.createElement('div');
+            lineNode.className = `log-row ${layoutStyleClass}`;
+            lineNode.innerText = text;
+            viewport.appendChild(lineNode);
             viewport.scrollTop = viewport.scrollHeight;
         }
 
-        function triggerWorkflowPipeline() {
-            const inputNode = document.getElementById('pipelineInput');
-            const command = inputNode.value.trim();
-            if(!command) return;
+        function dispatchAgentWorkflowPipeline() {
+            const inputElement = document.getElementById('agentInputNode');
+            const queryRaw = inputElement.value.trim();
+            if(!queryRaw) return;
 
-            logLineToView(`[USER] Dispatching Custom Command...`, 'color-usr');
-            logLineToView(`[SECURITY] Sanitizing incoming payload structural nodes...`, 'color-alert');
+            const timeString = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
 
-            inputNode.value = '';
+            // Real-time reasoning multi-step visualization logs
+            pushLineToViewport(`[${timeString}] [USER] Internal Pipeline Triggered: "${queryRaw}"....`, 'c-user');
+            pushLineToViewport(`[${timeString}] [SECURITY] Analyzing structural token nodes for enterprise risk safety...`, 'c-sec');
+
+            inputElement.value = '';
 
             fetch('/process', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ command: command })
+                body: JSON.stringify({ command: queryRaw })
             })
             .then(res => res.json())
-            .then(payload => {
-                logLineToView(`[FOUNDRY_IQ] Grounded Context: Query parsed via Core Engine node successfully.`, 'color-sys');
-                
-                if (payload.output) {
-                    logLineToView(`> System Core: ${payload.output}`, 'color-sys');
+            .then(data => {
+                pushLineToViewport(`[${timeString}] [FOUNDRY_IQ] Multi-step execution response matrix resolved successfully.`, 'c-sys');
+                if (data.output) {
+                    pushLineToViewport(`> Agent Trace Output: ${data.output}`, 'c-sys');
                 } else {
-                    logLineToView(`> Engine Telemetry Trace Matrix:`, 'color-usr');
-                    logLineToView(JSON.stringify(payload, null, 2), 'color-json');
+                    pushLineToViewport(`> Core Telemetry Trace Vector Received.`, 'c-audit');
                 }
             })
             .catch(err => {
-                logLineToView(`[CRITICAL] Execution Pipeline broken: ${err}`, 'color-alert');
+                pushLineToViewport(`[CRITICAL] Agent Node Breakdown: ${err}`, 'c-sec');
             });
         }
     </script>
