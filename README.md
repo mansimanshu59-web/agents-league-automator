@@ -16,6 +16,9 @@ The agent processes user prompts through a strict zero-trust ingestion pipeline 
 
 ---
 
+### 🖥️ High-Fidelity Command Interface
+![Secure-IQ Dashboard](assets/Screenshot_20260601_132557.jpg)
+
 ## 🛡️ Security & Compliance
 Our agent utilizes a Zero-Trust Sanitization Layer to protect against malicious injections.
 
