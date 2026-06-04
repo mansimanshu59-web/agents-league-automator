@@ -547,30 +547,45 @@ function setStep(i){
     if(j<4)document.getElementById('pc'+j).className=`pcon${j<i?' active':''}`;
   }
 }
-document.getElementById('runBtn').addEventListener('click',()=>{
-  const cmd=document.getElementById('cmdIn').value.trim();
-  if(!cmd){addLog('AUDIT','ta','⚠ No command entered.');return;}
-  for(let j=0;j<5;j++){document.getElementById('s'+j).className='porb idle';if(j<4)document.getElementById('pc'+j).className='pcon';}
-  document.getElementById('mS').textContent='RUN';document.getElementById('mN').textContent='0';
-  document.getElementById('trEl').textContent='TR-'+Date.now().toString().slice(-8);
-  while(logBody.children.length>1)logBody.removeChild(logBody.lastChild);
-  const isHi=/(drop|exec|eval|script)/i.test(cmd),isMed=/(admin|root|bypass)/i.test(cmd);
-  const score=isHi?91:isMed?48:14;
-  addLog('USER','tu',`⚡ Command: "${cmd.slice(0,46)}${cmd.length>46?'...':''}"`,0);
-  setTimeout(()=>{setStep(0);document.getElementById('mN').textContent='1';},300);
-  addLog('SECURITY','ts',`🛡 Sanitizing payload — Zero Trust scan initiated.`,600);
-  addLog('SECURITY','ts',`🔍 Threat Score: ${score}% | Risk: ${isHi?'HIGH':isMed?'MEDIUM':'LOW'}`,1100);
-  setTimeout(()=>{document.getElementById('mT').textContent=score+'%';},1100);
-  setTimeout(()=>{setStep(1);document.getElementById('mN').textContent='2';},1600);
-  addLog('AUDIT','ta',`📋 Trace initiated: ZeroTrust → MetricCalc → Foundry → Action`,1900);
-  setTimeout(()=>{setStep(2);document.getElementById('mN').textContent='3';},2500);
-  addLog('FOUNDRY','tf',`☁ Foundry IQ — Knowledge Graph Retrieval initializing...`,2800);
-  addLog('FOUNDRY','tf',`✅ Context grounded via Multi-Step Core Engine.`,3500);
-  setTimeout(()=>{setStep(3);document.getElementById('mN').textContent='4';},4000);
-  addLog('ACTION','tac',`⚙ Action Scheduler — Deploying remediation module...`,4300);
-  setTimeout(()=>{setStep(4);document.getElementById('mN').textContent='5';document.getElementById('mS').textContent='SECURE';},5200);
-  addLog('AUDIT','ta',`🔒 Pipeline CLOSED. Status: SECURE // ACTIVE.`,5500);
+document.getElementById('runBtn').addEventListener('click', async () => {
+  const cmd = document.getElementById('cmdIn').value.trim();
+  if (!cmd) { addLog('AUDIT', 'ta', '⚠ No command entered.'); return; }
+
+  // Reset UI
+  for (let j = 0; j < 5; j++) { document.getElementById('s' + j).className = 'porb idle'; if (j < 4) document.getElementById('pc' + j).className = 'pcon'; }
+  document.getElementById('mS').textContent = 'RUNNING';
+  
+  // Real API Call to Flask Backend
+  try {
+    const response = await fetch('/process', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ command: cmd })
+    });
+    const data = await response.json();
+    const result = JSON.parse(data.output);
+
+    // Dynamic UI Updates from Backend Logic
+    addLog('USER', 'tu', `⚡ Request: "${cmd.slice(0, 20)}..."`, 0);
+    setStep(0); 
+    addLog('SECURITY', 'ts', `🛡 Risk Scan: ${result.Risk_Telemetry.threat_confidence_score} | Status: ${result.Risk_Telemetry.risk_status}`, 600);
+    
+    setStep(1);
+    addLog('AUDIT', 'ta', `📋 Pipeline Trace: ${result.Reasoning_Pipeline}`, 1200);
+    
+    setStep(2);
+    addLog('FOUNDRY', 'tf', `☁ Context Grounded: ${result.Cloud_Context.policy || 'Standard Sec-Compliance'}`, 1800);
+    
+    setStep(3);
+    addLog('ACTION', 'tac', `⚙ ${result.Orchestration_Output}`, 2400);
+    
+    setStep(4);
+    document.getElementById('mT').textContent = result.Risk_Telemetry.threat_confidence_score;
+    document.getElementById('mS').textContent = 'SECURE';
+    document.getElementById('trEl').textContent = 'SUCCESS_RESOLVED';
+    addLog('AUDIT', 'ta', '🔒 Pipeline CLOSED. Status: SECURE // ACTIVE.', 3000);
+    
+  } catch (err) {
+    addLog('ERROR', 'tf', '⚠ Cloud Tunnel Error: Foundry SDK not responding.', 500);
+  }
 });
-</script>
-</body>
-</html>
