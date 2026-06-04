@@ -6,6 +6,7 @@ logging.basicConfig(level=logging.INFO)
 class FoundryIQ:
     def __init__(self):
         # Local knowledge base to simulate real-time enterprise grounding
+# TODO: Integrate Microsoft Foundry IQ SDK once environment credentials are provisioned via Azure Student Subscription.
         self.knowledge_base = {
             "vulnerability": {
                 "cve": "CVE-2026-1337",
