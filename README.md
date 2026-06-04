@@ -1,4 +1,4 @@
-# Secure-IQ Automator (Reasoning Agent Core)
+# AegisIQ: Autonomous Threat Reasoning Agent
 
 An advanced, multi-step reasoning agent architecture engineered for the Microsoft Agents League Hackathon 2026. This system implements deep security sanitization layers combined with sequential logic execution, designed to integrate seamlessly with the Microsoft Foundry IQ intelligence layer.
 
