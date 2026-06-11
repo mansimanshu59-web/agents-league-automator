@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURE-IQ // Elite Command Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0d0e12;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Full Screen Workspace replicating the premium dark canvas */
+        .app-container {
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 30% 20%, #171921 0%, #0c0d10 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* ================= 3D LAYERED FLUID RIBBONS (Directly cloning 53863.jpg + 53828.jpg) ================= */
+        /* Deep glowing illumination layer */
+        .glow-ambient {
+            position: absolute;
+            bottom: -15%;
+            left: 20%;
+            width: 800px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.12) 0%, transparent 70%);
+            filter: blur(50px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 3D Golden Curved Ribbon Layer */
+        .ribbon-3d-gold {
+            position: absolute;
+            bottom: -80px;
+            right: -5%;
+            width: 75%;
+            height: 260px;
+            background: linear-gradient(90deg, #d4a373 0%, #ffcc00 40%, #ffdf43 100%);
+            border-radius: 250px 180px 0 0;
+            transform: rotate(-3deg) skewX(-10deg);
+            box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.6), inset 0 3px 8px rgba(255,255,255,0.4);
+            z-index: 2;
+        }
+
+        /* Dark Matte Intersecting Wing Overlap creating the true 3D depth slice from image 53863 */
+        .ribbon-3d-dark-swoop {
+            position: absolute;
+            bottom: -120px;
+            right: 25%;
+            width: 60%;
+            height: 290px;
+            background: linear-gradient(135deg, #1b1d26 0%, #0e0f13 100%);
+            border-radius: 200px 300px 0 0;
+            transform: rotate(-6deg);
+            box-shadow: 20px -10px 45px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255,255,255,0.1);
+            z-index: 3;
+        }
+
+        /* ================= LEFT CONTROLS ZONE (Exact 52760.png Alignment) ================= */
+        .left-control-panel {
+            width: 40%;
+            height: 100%;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 5;
+            position: relative;
+        }
+
+        /* SECURE-IQ Brand Header */
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .brand-logo-skew {
+            width: 24px;
+            height: 15px;
+            background-color: #ffcc00;
+            transform: skewX(-20deg);
+            border-radius: 2px;
+            box-shadow: 0 0 12px rgba(255,204,0,0.4);
+        }
+        .brand-text {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 19px;
+            letter-spacing: 0.8px;
+        }
+
+        /* Typography Block from 52760.png */
+        .main-title-block {
+            margin-top: 10px;
+        }
+        .main-title-block h1 {
+            color: #ffffff;
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        /* Enterprise Prompt Input Box */
+        .enterprise-input-card {
+            background-color: rgba(22, 24, 30, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-left: 3px solid #ffcc00;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .input-card-label {
+            font-size: 10px;
+            color: #8f96a3;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .input-card-label span { color: #ffcc00; }
+        
+        .system-input-field {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            font-weight: 500;
+        }
+
+        /* Capsule Trigger Button */
+        .trigger-capsule-btn {
+            width: 100%;
+            background-color: #ffffff;
+            color: #0c0d10;
+            border: none;
+            padding: 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .trigger-capsule-btn:hover {
+            background-color: #ffcc00;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255,204,0,0.3);
+        }
+
+        /* Status Badge */
+        .status-pill-footer {
+            background-color: rgba(22, 24, 30, 0.6);
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            align-self: flex-start;
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.05);
+            letter-spacing: 0.5px;
+        }
+        .status-glow-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ff66;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff66;
+        }
+
+        /* ================= RIGHT MONITOR ZONE (Exact 52760.png Layout) ================= */
+        .right-display-panel {
+            width: 60%;
+            height: 100%;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 4;
+            position: relative;
+        }
+
+        /* Minimalist Navigation Grid */
+        .top-navigation-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 40px;
+        }
+        .nav-item-link {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            line-height: 1.3;
+            transition: color 0.2s;
+        }
+        .nav-item-link:hover {
+            color: #ffffff;
+        }
+
+        /* The Large Intelligence Floating Terminal Box */
+        .intelligence-console-card {
+            background: rgba(18, 20, 26, 0.92);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            width: 100%;
+            max-width: 640px;
+            border: 1px solid rgba(255,255,255,0.04);
+            backdrop-filter: blur(15px);
+            align-self: flex-start;
+            margin-top: 20px;
+        }
+        .console-main-title {
+            font-size: 19px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        /* Inside Terminal Output Viewport */
+        .terminal-scroll-viewport {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            height: 210px;
+            overflow-y: auto;
+            color: #00ff66;
+            padding-right: 5px;
+        }
+        .terminal-row { margin-bottom: 6px; word-break: break-all; }
+        .cls-sys { color: #00ff66; }
+        .cls-usr { color: #ffcc00; }
+        .cls-alert { color: #ff3c3c; }
+        .cls-trace-block { color: #00d2ff; font-size: 12px; white-space: pre-wrap; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; display: block; margin: 6px 0; border: 1px solid rgba(255,255,255,0.02); }
+
+        /* Bottom Ecosystem Badges Dock */
+        .bottom-badge-dock {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            align-items: center;
+        }
+        .eco-capsule-badge {
+            background: rgba(22, 24, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div class="glow-ambient"></div>
+
+        <div class="left-control-panel">
+            <div class="brand-header">
+                <div class="brand-logo-skew"></div>
+                <div class="brand-text">SECURE-IQ</div>
+            </div>
+
+            <div class="main-title-block">
+                <h1>AGENT<br>COMMAND<br>INTERFACE</h1>
+            </div>
+
+            <div>
+                <div class="enterprise-input-card">
+                    <div class="input-card-label"><span>⚡</span> Enter Enterprise Command Prompt</div>
+                    <input type="text" id="pipelineInput" class="system-input-field" placeholder="Hello" onkeydown="if(event.key === 'Enter') handleDispatchPipeline()">
+                </div>
+
+                <button class="trigger-capsule-btn" onclick="handleDispatchPipeline()">
+                    🚀 Trigger Agent Workflow
+                </button>
+            </div>
+
+            <div class="status-pill-footer">
+                <div class="status-glow-dot"></div>
+                Status: Secure // Active
+            </div>
+        </div>
+
+        <div class="ribbon-3d-gold"></div>
+        <div class="ribbon-3d-dark-swoop"></div>
+
+        <div class="right-display-panel">
+            
+            <div class="top-navigation-row">
+                <a href="#" class="nav-item-link">ABOUT<br>OVERVIEW</a>
+                <a href="#" class="nav-item-link">PROCESS WORKFLOW<br>VIEWER</a>
+                <a href="#" class="nav-item-link">GET IN TOUCH<br>CONFIGURATION</a>
+            </div>
+
+            <div class="intelligence-console-card">
+                <div class="console-main-title">Intelligence Node Logs</div>
+                <div class="terminal-scroll-viewport" id="logsTerminal">
+                    <div class="terminal-row cls-sys">MS_FOUNDRY_IQ.</div>
+                    <div class="terminal-row cls-sys">[16:04:18] [AUDIT] Standby mode active. Awaiting user input pipeline dispatch...</div>
+                </div>
+            </div>
+
+            <div class="bottom-badge-dock">
+                <div class="eco-capsule-badge">🛡️ Foundry IQ</div>
+                <div class="eco-capsule-badge">💾 Work IQ</div>
+                <div class="eco-capsule-badge">🔀 Fabric IQ</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function logNodeToScreen(text, themeClass) {
+            const terminal = document.getElementById('logsTerminal');
+            const rowNode = document.createElement('div');
+            rowNode.className = `terminal-row ${themeClass}`;
+            
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            
+            if (themeClass === 'cls-trace-block') {
+                rowNode.innerText = text;
+            } else {
+                rowNode.innerText = `[${time}] ${text}`;
+            }
+            
+            terminal.appendChild(rowNode);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function handleDispatchPipeline() {
+            const field = document.getElementById('pipelineInput');
+            const val = field.value.trim();
+            if(!val) return;
+
+            logNodeToScreen(`[USER] Dispatching Custom Command...`, 'cls-usr');
+            logNodeToScreen(`[SECURITY] Sanitizing incoming payload structural nodes...`, 'cls-alert');
+
+            field.value = '';
+
+            fetch('/process', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ command: val })
+            })
+            .then(res => res.json())
+            .then(resData => {
+                logNodeToScreen(`[FOUNDRY_IQ] Grounded Context: Query parsed via Core Engine node successfully.`, 'cls-sys');
+                
+                if (resData.output) {
+                    logNodeToScreen(`> System Core: ${resData.output}`, 'cls-sys');
+                } else {
+                    logNodeToScreen(`> Engine Telemetry Trace Matrix:`, 'cls-usr');
+                    logNodeToScreen(JSON.stringify(resData, null, 2), 'cls-trace-block');
+                }
+            })
+            .catch(err => {
+                logNodeToScreen(`[CRITICAL] Execution Pipeline broken: ${err}`, 'cls-alert');
+            });
+        }
+    </script>
+</body>
+</html>
