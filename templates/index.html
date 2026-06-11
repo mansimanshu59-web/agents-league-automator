@@ -3,80 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>SECURE-IQ | AGENT COMMAND</title>
+<title>SECURE-IQ | SKY BLUE</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:linear-gradient(135deg,#FFF8E7,#F5E6D3);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;cursor:none;}
-#cursor-glow{position:fixed;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(197,160,89,0.15),transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-#cursor-core{position:fixed;width:10px;height:10px;background:#C5A059;border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);box-shadow:0 0 20px #D4A574;}
+body{background:linear-gradient(135deg,#E8F4FD,#B8E1FC);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;cursor:none;}
+#cursor-glow{position:fixed;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,180,216,0.15),transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor-core{position:fixed;width:10px;height:10px;background:#00B4D8;border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);box-shadow:0 0 20px #48CAE4;}
 #three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;}
 .container{position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:20px;}
-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:40px;padding:15px 30px;background:rgba(255,255,255,0.7);backdrop-filter:blur(20px);border-radius:80px;border:1px solid rgba(197,160,89,0.2);}
-.logo-mark{width:50px;height:50px;background:linear-gradient(135deg,#C5A059,#D4A574);border-radius:18px;display:flex;align-items:center;justify-content:center;animation:softPulse 3s ease-in-out infinite;}
+nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:40px;padding:15px 30px;background:rgba(255,255,255,0.7);backdrop-filter:blur(20px);border-radius:80px;border:1px solid rgba(0,180,216,0.2);}
+.logo-mark{width:50px;height:50px;background:linear-gradient(135deg,#00B4D8,#48CAE4);border-radius:18px;display:flex;align-items:center;justify-content:center;animation:softPulse 3s ease-in-out infinite;}
 @keyframes softPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
-.logo-txt{font-family:'Orbitron',monospace;font-size:22px;font-weight:900;letter-spacing:5px;background:linear-gradient(135deg,#C5A059,#8B6914);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.logo-txt{font-family:'Orbitron',monospace;font-size:22px;font-weight:900;letter-spacing:5px;background:linear-gradient(135deg,#0077B6,#00B4D8);-webkit-background-clip:text;background-clip:text;color:transparent;}
 .nav-links{display:flex;gap:35px;list-style:none;}
-.nav-links a{font-size:12px;letter-spacing:2px;color:#5C4033;text-decoration:none;text-transform:uppercase;font-weight:600;}
-.status-pill{display:flex;align-items:center;gap:10px;padding:10px 22px;background:rgba(197,160,89,0.1);border-radius:100px;font-family:'Space Mono',monospace;font-size:10px;color:#C5A059;border:1px solid rgba(197,160,89,0.3);}
-.status-dot{width:10px;height:10px;background:#4CAF50;border-radius:50%;animation:pulseGreen 1.5s infinite;}
+.nav-links a{font-size:12px;letter-spacing:2px;color:#023E8A;text-decoration:none;text-transform:uppercase;font-weight:600;}
+.status-pill{display:flex;align-items:center;gap:10px;padding:10px 22px;background:rgba(0,180,216,0.1);border-radius:100px;font-family:'Space Mono',monospace;font-size:10px;color:#00B4D8;border:1px solid rgba(0,180,216,0.3);}
+.status-dot{width:10px;height:10px;background:#00ff88;border-radius:50%;animation:pulseGreen 1.5s infinite;}
 @keyframes pulseGreen{0%,100%{opacity:1;}50%{opacity:0.3;}}
 .hero{display:grid;grid-template-columns:1fr;gap:35px;}
 @media(min-width:1024px){.hero{grid-template-columns:1fr 1fr;gap:60px;}}
-.big-title{font-size:clamp(56px,9vw,108px);font-weight:900;line-height:0.9;letter-spacing:-4px;background:linear-gradient(135deg,#C5A059,#8B6914,#D4A574);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;}
-.sub-title{font-family:'Orbitron',monospace;font-size:13px;letter-spacing:5px;color:#A0845C;margin-bottom:25px;}
-.tagline{font-size:15px;color:#6B4E3A;line-height:1.7;border-left:3px solid #C5A059;padding-left:20px;margin-bottom:35px;}
-.cmd-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border-radius:32px;padding:32px;border:1px solid rgba(197,160,89,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.05);transition:all 0.3s;}
-.cmd-card:hover{transform:translateY(-8px);box-shadow:0 30px 50px rgba(197,160,89,0.15);}
-.cmd-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:#C5A059;margin-bottom:18px;}
-.cmd-input{width:100%;background:rgba(255,255,255,0.95);border:1px solid rgba(197,160,89,0.3);border-radius:20px;padding:18px;color:#2C1810;font-family:'Space Mono',monospace;font-size:14px;outline:none;resize:vertical;min-height:120px;}
-.cmd-input:focus{border-color:#C5A059;box-shadow:0 0 25px rgba(197,160,89,0.2);}
-.run-btn{width:100%;margin-top:20px;padding:18px;background:linear-gradient(135deg,#C5A059,#D4A574);border:none;border-radius:20px;color:white;font-family:'Orbitron',monospace;font-size:14px;font-weight:900;letter-spacing:4px;cursor:pointer;transition:all 0.3s;}
-.run-btn:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(197,160,89,0.4);}
+.big-title{font-size:clamp(56px,9vw,108px);font-weight:900;line-height:0.9;letter-spacing:-4px;background:linear-gradient(135deg,#0077B6,#00B4D8,#48CAE4);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px;}
+.sub-title{font-family:'Orbitron',monospace;font-size:13px;letter-spacing:5px;color:#0077B6;margin-bottom:25px;}
+.tagline{font-size:15px;color:#023E8A;line-height:1.7;border-left:3px solid #00B4D8;padding-left:20px;margin-bottom:35px;}
+.cmd-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border-radius:32px;padding:32px;border:1px solid rgba(0,180,216,0.2);box-shadow:0 20px 40px rgba(0,0,0,0.05);transition:all 0.3s;}
+.cmd-card:hover{transform:translateY(-8px);box-shadow:0 30px 50px rgba(0,180,216,0.15);}
+.cmd-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:#00B4D8;margin-bottom:18px;}
+.cmd-input{width:100%;background:rgba(255,255,255,0.95);border:1px solid rgba(0,180,216,0.3);border-radius:20px;padding:18px;color:#023E8A;font-family:'Space Mono',monospace;font-size:14px;outline:none;resize:vertical;min-height:120px;}
+.cmd-input:focus{border-color:#00B4D8;box-shadow:0 0 25px rgba(0,180,216,0.2);}
+.run-btn{width:100%;margin-top:20px;padding:18px;background:linear-gradient(135deg,#00B4D8,#48CAE4);border:none;border-radius:20px;color:white;font-family:'Orbitron',monospace;font-size:14px;font-weight:900;letter-spacing:4px;cursor:pointer;transition:all 0.3s;}
+.run-btn:hover{transform:scale(1.02);box-shadow:0 10px 30px rgba(0,180,216,0.4);}
 .iq-row{display:flex;gap:15px;flex-wrap:wrap;margin-top:25px;}
 .iq-pill{padding:10px 22px;border-radius:100px;font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase;font-family:'Space Mono',monospace;border:1px solid;cursor:pointer;transition:all 0.3s;}
 .iq-pill:hover{transform:translateY(-3px);}
-.iq-pill-1{background:rgba(197,160,89,0.1);border-color:#C5A059;color:#C5A059;}
-.iq-pill-2{background:rgba(212,165,116,0.1);border-color:#D4A574;color:#D4A574;}
-.iq-pill-3{background:linear-gradient(135deg,#C5A059,#D4A574);border-color:transparent;color:white;}
-.log-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border-radius:32px;overflow:hidden;border:1px solid rgba(197,160,89,0.2);margin-bottom:20px;}
-.log-header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(197,160,89,0.1);border-bottom:1px solid rgba(197,160,89,0.2);}
-.log-header-text{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#C5A059;}
+.iq-pill-1{background:rgba(0,180,216,0.1);border-color:#00B4D8;color:#00B4D8;}
+.iq-pill-2{background:rgba(72,202,228,0.1);border-color:#48CAE4;color:#48CAE4;}
+.iq-pill-3{background:linear-gradient(135deg,#00B4D8,#48CAE4);border-color:transparent;color:white;}
+.log-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border-radius:32px;overflow:hidden;border:1px solid rgba(0,180,216,0.2);margin-bottom:20px;}
+.log-header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(0,180,216,0.1);border-bottom:1px solid rgba(0,180,216,0.2);}
+.log-header-text{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:#00B4D8;}
 .log-body{padding:20px 24px;font-family:'Space Mono',monospace;font-size:11px;min-height:280px;max-height:300px;overflow-y:auto;}
-.log-entry{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(197,160,89,0.1);flex-wrap:wrap;animation:slideInUp 0.3s ease-out;}
+.log-entry{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(0,180,216,0.1);flex-wrap:wrap;animation:slideInUp 0.3s ease-out;}
 @keyframes slideInUp{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
-.log-time{color:#A0845C;min-width:65px;font-size:9px;}
+.log-time{color:#0077B6;min-width:65px;font-size:9px;}
 .log-tag{font-size:8px;padding:3px 12px;border-radius:8px;font-weight:700;}
-.tag-audit{background:#C5A059;color:white;}
-.tag-user{background:#D4A574;color:white;}
-.tag-sec{background:#E8A598;color:white;}
-.tag-foun{background:#C5A059;color:white;}
-.tag-act{background:rgba(197,160,89,0.2);color:#C5A059;border:1px solid #C5A059;}
-.log-message{color:#5C4033;font-size:10px;flex:1;word-break:break-word;}
+.tag-audit{background:#00B4D8;color:white;}
+.tag-user{background:#48CAE4;color:white;}
+.tag-sec{background:#FF6B6B;color:white;}
+.tag-foun{background:#00B4D8;color:white;}
+.tag-act{background:rgba(0,180,216,0.2);color:#00B4D8;border:1px solid #00B4D8;}
+.log-message{color:#023E8A;font-size:10px;flex:1;word-break:break-word;}
 .metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px;}
-.metric-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-radius:24px;padding:22px 12px;text-align:center;border:1px solid rgba(197,160,89,0.2);transition:all 0.3s;}
-.metric-card:hover{transform:translateY(-8px) scale(1.02);border-color:#C5A059;}
-.metric-card:nth-child(1) .metric-value{color:#C5A059;}
-.metric-card:nth-child(2) .metric-value{color:#D4A574;}
-.metric-card:nth-child(3) .metric-value{color:#A0845C;}
+.metric-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);border-radius:24px;padding:22px 12px;text-align:center;border:1px solid rgba(0,180,216,0.2);transition:all 0.3s;}
+.metric-card:hover{transform:translateY(-8px) scale(1.02);border-color:#00B4D8;}
+.metric-card:nth-child(1) .metric-value{color:#0077B6;}
+.metric-card:nth-child(2) .metric-value{color:#00B4D8;}
+.metric-card:nth-child(3) .metric-value{color:#48CAE4;}
 .metric-value{font-size:44px;font-weight:900;font-family:'Orbitron',monospace;}
-.metric-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-top:10px;font-family:'Space Mono',monospace;color:#A0845C;}
-.pipeline-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border-radius:28px;padding:24px;border:1px solid rgba(197,160,89,0.2);overflow-x:auto;}
-.pipeline-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:#A0845C;margin-bottom:20px;}
+.metric-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-top:10px;font-family:'Space Mono',monospace;color:#0077B6;}
+.pipeline-card{background:rgba(255,255,255,0.85);backdrop-filter:blur(15px);border-radius:28px;padding:24px;border:1px solid rgba(0,180,216,0.2);overflow-x:auto;}
+.pipeline-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:#0077B6;margin-bottom:20px;}
 .pipeline-steps{display:flex;align-items:center;min-width:550px;}
 .step{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:80px;}
 .step-icon{width:55px;height:55px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;transition:all 0.4s;border:2px solid;background:rgba(255,255,255,0.6);}
-.step-icon.idle{border-color:rgba(197,160,89,0.3);color:rgba(197,160,89,0.4);}
-.step-icon.active{border-color:#C5A059;background:rgba(197,160,89,0.15);color:#C5A059;box-shadow:0 0 30px rgba(197,160,89,0.4);animation:bounceStep 0.6s infinite alternate;}
+.step-icon.idle{border-color:rgba(0,180,216,0.3);color:rgba(0,180,216,0.4);}
+.step-icon.active{border-color:#00B4D8;background:rgba(0,180,216,0.15);color:#00B4D8;box-shadow:0 0 30px rgba(0,180,216,0.4);animation:bounceStep 0.6s infinite alternate;}
 @keyframes bounceStep{to{transform:scale(1.08);}}
-.step-icon.completed{border-color:#4CAF50;background:rgba(76,175,80,0.15);color:#4CAF50;}
-.step-name{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:#A0845C;text-align:center;}
-.connector{flex:1;height:3px;background:rgba(197,160,89,0.2);margin-bottom:32px;}
-.connector.active{background:linear-gradient(90deg,#C5A059,#D4A574);animation:flowGradient 1s linear infinite;background-size:200%100%;}
+.step-icon.completed{border-color:#00ff88;background:rgba(0,255,136,0.15);color:#00ff88;}
+.step-name{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;color:#0077B6;text-align:center;}
+.connector{flex:1;height:3px;background:rgba(0,180,216,0.2);margin-bottom:32px;}
+.connector.active{background:linear-gradient(90deg,#00B4D8,#48CAE4);animation:flowGradient 1s linear infinite;background-size:200%100%;}
 @keyframes flowGradient{0%{background-position:0%0%;}100%{background-position:200%0%;}}
-footer{display:flex;align-items:center;justify-content:space-between;padding:20px 10px;margin-top:50px;border-top:1px solid rgba(197,160,89,0.2);flex-wrap:wrap;gap:10px;}
-.footer-text{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:#A0845C;}
-.touch-ripple{position:fixed;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(197,160,89,0.4),transparent);pointer-events:none;z-index:9997;transform:translate(-50%,-50%) scale(0);animation:rippleBurst 0.8s ease-out forwards;}
+footer{display:flex;align-items:center;justify-content:space-between;padding:20px 10px;margin-top:50px;border-top:1px solid rgba(0,180,216,0.2);flex-wrap:wrap;gap:10px;}
+.footer-text{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:#0077B6;}
+.touch-ripple{position:fixed;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,180,216,0.4),transparent);pointer-events:none;z-index:9997;transform:translate(-50%,-50%) scale(0);animation:rippleBurst 0.8s ease-out forwards;}
 @keyframes rippleBurst{0%{transform:translate(-50%,-50%) scale(0);opacity:0.8;}100%{transform:translate(-50%,-50%) scale(4);opacity:0;}}
 </style>
 </head>
@@ -84,12 +84,12 @@ footer{display:flex;align-items:center;justify-content:space-between;padding:20p
 <div id="cursor-glow"></div><div id="cursor-core"></div>
 <canvas id="three-canvas"></canvas>
 <div class="container">
-<nav><div class="logo"><div class="logo-mark"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C5A059" stroke-width="1.5"/><circle cx="12" cy="12" r="6" stroke="#D4A574" stroke-width="1"/><circle cx="12" cy="12" r="2.5" fill="#C5A059"/></svg></div><span class="logo-txt">SECURE-IQ</span></div><ul class="nav-links"><li><a href="#">Workflow</a></li><li><a href="#">Process</a></li><li><a href="#">Configuration</a></li></ul><div class="status-pill"><div class="status-dot"></div>BACKEND // ACTIVE</div></nav>
+<nav><div class="logo"><div class="logo-mark"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#00B4D8" stroke-width="1.5"/><circle cx="12" cy="12" r="6" stroke="#48CAE4" stroke-width="1"/><circle cx="12" cy="12" r="2.5" fill="#00B4D8"/></svg></div><span class="logo-txt">SECURE-IQ</span></div><ul class="nav-links"><li><a href="#">Workflow</a></li><li><a href="#">Process</a></li><li><a href="#">Configuration</a></li></ul><div class="status-pill"><div class="status-dot"></div>BACKEND // ACTIVE</div></nav>
 <div class="hero">
 <div class="left"><div><div class="big-title">AGENT<br>COMMAND</div><div class="sub-title">// MICROSOFT FOUNDRY IQ</div></div><p class="tagline">Enterprise reasoning pipeline with real-time knowledge grounding. Autonomous threat detection & remediation at scale.</p>
 <div class="cmd-card"><div class="cmd-label"><span>⚡</span> ENTERPRISE COMMAND PROMPT</div><textarea class="cmd-input" id="commandInput" placeholder='Example: "Scan network for vulnerabilities and patch CVEs"'></textarea><button class="run-btn" id="runBtn">🚀 TRIGGER AGENT WORKFLOW</button></div>
 <div class="iq-row"><div class="iq-pill iq-pill-1">⬡ Foundry IQ</div><div class="iq-pill iq-pill-2">⊞ Work IQ</div><div class="iq-pill iq-pill-3">◈ Fabric IQ</div></div></div>
-<div class="right"><div class="log-card"><div class="log-header"><div class="log-header-text">// INTELLIGENCE NODE LOGS</div><div style="display:flex;gap:8px;"><span style="width:10px;height:10px;background:#E8A598;border-radius:50%;"></span><span style="width:10px;height:10px;background:#C5A059;border-radius:50%;"></span><span style="width:10px;height:10px;background:#4CAF50;border-radius:50%;"></span></div></div><div class="log-body" id="logContainer"><div class="log-entry"><span class="log-time">--:--:--</span><span class="log-tag tag-audit">AUDIT</span><span class="log-message">MS_FOUNDRY_IQ. Backend connected. Awaiting pipeline dispatch...</span></div></div></div>
+<div class="right"><div class="log-card"><div class="log-header"><div class="log-header-text">// INTELLIGENCE NODE LOGS</div><div style="display:flex;gap:8px;"><span style="width:10px;height:10px;background:#FF6B6B;border-radius:50%;"></span><span style="width:10px;height:10px;background:#00B4D8;border-radius:50%;"></span><span style="width:10px;height:10px;background:#00ff88;border-radius:50%;"></span></div></div><div class="log-body" id="logContainer"><div class="log-entry"><span class="log-time">--:--:--</span><span class="log-tag tag-audit">AUDIT</span><span class="log-message">MS_FOUNDRY_IQ. Backend connected. Awaiting pipeline dispatch...</span></div></div></div>
 <div class="metrics-grid"><div class="metric-card"><div class="metric-value" id="threatScore">0%</div><div class="metric-label">Threat Score</div></div><div class="metric-card"><div class="metric-value" id="nodeCount">0</div><div class="metric-label">Nodes Active</div></div><div class="metric-card"><div class="metric-value" id="pipelineStatus">IDLE</div><div class="metric-label">Pipeline</div></div></div>
 <div class="pipeline-card"><div class="pipeline-label">// REASONING PIPELINE</div><div class="pipeline-steps"><div class="step"><div class="step-icon idle" id="step0">🛡️</div><div class="step-name">Zero Trust</div></div><div class="connector" id="conn0"></div><div class="step"><div class="step-icon idle" id="step1">📊</div><div class="step-name">Metrics</div></div><div class="connector" id="conn1"></div><div class="step"><div class="step-icon idle" id="step2">☁️</div><div class="step-name">Foundry IQ</div></div><div class="connector" id="conn2"></div><div class="step"><div class="step-icon idle" id="step3">⚙️</div><div class="step-name">Action</div></div><div class="connector" id="conn3"></div><div class="step"><div class="step-icon idle" id="step4">✅</div><div class="step-name">Resolved</div></div></div></div></div></div>
 <footer><div class="footer-text">SECURE-IQ v3.0 // <strong>FOUNDRY IQ BACKEND LIVE</strong></div><div class="footer-text">AGENTS LEAGUE 2026 // <span>REASONING TRACK</span></div><div class="footer-text">TRACE: <span id="traceId">IDLE</span></div></footer></div>
@@ -102,16 +102,16 @@ document.addEventListener('mousemove',handleMove);document.addEventListener('tou
 function animateCursor(){glowX+=(mouseX-glowX)*0.1;glowY+=(mouseY-glowY)*0.1;coreX+=(mouseX-coreX)*0.25;coreY+=(mouseY-coreY)*0.25;glowCursor.style.left=glowX+'px';glowCursor.style.top=glowY+'px';coreCursor.style.left=coreX+'px';coreCursor.style.top=coreY+'px';requestAnimationFrame(animateCursor);}
 animateCursor();
 document.querySelectorAll('.run-btn, .iq-pill, .nav-links a, .metric-card').forEach(el=>{el.addEventListener('mouseenter',()=>{glowCursor.style.width='160px';glowCursor.style.height='160px';coreCursor.style.width='14px';coreCursor.style.height='14px';});el.addEventListener('mouseleave',()=>{glowCursor.style.width='120px';glowCursor.style.height='120px';coreCursor.style.width='10px';coreCursor.style.height='10px';});});
-// 3D Sphere
+// 3D Sphere - Sky Blue Theme
 const canvas=document.getElementById('three-canvas');const renderer=new THREE.WebGLRenderer({canvas,alpha:true});let w=window.innerWidth,h=window.innerHeight;renderer.setSize(w,h);renderer.setClearColor(0x000000,0);const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(42,w/h,0.1,1000);camera.position.set(0,1,9);camera.lookAt(0,0,0);
-const mainMat=new THREE.MeshPhongMaterial({color:0xD4A574,emissive:0xC5A059,emissiveIntensity:0.15,shininess:85,transparent:true,opacity:0.92});const mainSphere=new THREE.Mesh(new THREE.SphereGeometry(1.55,128,128),mainMat);scene.add(mainSphere);
-const coreMat=new THREE.MeshStandardMaterial({color:0xC5A059,emissive:0xD4A574,emissiveIntensity:0.4,metalness:0.7,roughness:0.3});const core=new THREE.Mesh(new THREE.SphereGeometry(0.65,64,64),coreMat);scene.add(core);
-for(let i=0;i<3;i++){const wireMat=new THREE.MeshBasicMaterial({color:[0xC5A059,0xD4A574,0xA0845C][i],wireframe:true,transparent:true,opacity:0.25});const wireSphere=new THREE.Mesh(new THREE.SphereGeometry(1.65+i*0.12,48,48),wireMat);scene.add(wireSphere);}
-const ringMat=new THREE.MeshBasicMaterial({color:0xC5A059,transparent:true,opacity:0.45});const rings=[];[2.1,2.4,2.7,3.0,3.3,3.6].forEach((size,idx)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(size,0.045,64,200),ringMat);ring.rotation.x=Math.PI/2+idx*0.3;ring.rotation.z=idx*0.5;scene.add(ring);rings.push(ring);});
-const satCount=100;const satellites=[];for(let i=0;i<satCount;i++){const satMat=new THREE.MeshStandardMaterial({color:0xD4A574,emissive:0xC5A059,emissiveIntensity:0.2});const sat=new THREE.Mesh(new THREE.SphereGeometry(0.07,16,16),satMat);scene.add(sat);satellites.push({mesh:sat,radius:2.2+Math.random()*1.5,speed:0.25+Math.random()*0.4,angle:(i/satCount)*Math.PI*2,ySpeed:0.3+Math.random()*0.6});}
-const ambient=new THREE.AmbientLight(0x332211);scene.add(ambient);const light1=new THREE.PointLight(0xC5A059,0.9);light1.position.set(3,4,5);scene.add(light1);const light2=new THREE.PointLight(0xD4A574,0.7);light2.position.set(-3,2,4);scene.add(light2);
+const mainMat=new THREE.MeshPhongMaterial({color:0x48CAE4,emissive:0x0077B6,emissiveIntensity:0.15,shininess:85,transparent:true,opacity:0.92});const mainSphere=new THREE.Mesh(new THREE.SphereGeometry(1.55,128,128),mainMat);scene.add(mainSphere);
+const coreMat=new THREE.MeshStandardMaterial({color:0x00B4D8,emissive:0x48CAE4,emissiveIntensity:0.4,metalness:0.7,roughness:0.3});const core=new THREE.Mesh(new THREE.SphereGeometry(0.65,64,64),coreMat);scene.add(core);
+for(let i=0;i<3;i++){const wireMat=new THREE.MeshBasicMaterial({color:[0x00B4D8,0x48CAE4,0x0077B6][i],wireframe:true,transparent:true,opacity:0.25});const wireSphere=new THREE.Mesh(new THREE.SphereGeometry(1.65+i*0.12,48,48),wireMat);scene.add(wireSphere);}
+const ringMat=new THREE.MeshBasicMaterial({color:0x00B4D8,transparent:true,opacity:0.45});const rings=[];[2.1,2.4,2.7,3.0,3.3,3.6].forEach((size,idx)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(size,0.045,64,200),ringMat);ring.rotation.x=Math.PI/2+idx*0.3;ring.rotation.z=idx*0.5;scene.add(ring);rings.push(ring);});
+const satCount=100;const satellites=[];for(let i=0;i<satCount;i++){const satMat=new THREE.MeshStandardMaterial({color:0x48CAE4,emissive:0x00B4D8,emissiveIntensity:0.2});const sat=new THREE.Mesh(new THREE.SphereGeometry(0.07,16,16),satMat);scene.add(sat);satellites.push({mesh:sat,radius:2.2+Math.random()*1.5,speed:0.25+Math.random()*0.4,angle:(i/satCount)*Math.PI*2,ySpeed:0.3+Math.random()*0.6});}
+const ambient=new THREE.AmbientLight(0x112233);scene.add(ambient);const light1=new THREE.PointLight(0x00B4D8,0.9);light1.position.set(3,4,5);scene.add(light1);const light2=new THREE.PointLight(0x48CAE4,0.7);light2.position.set(-3,2,4);scene.add(light2);
 const particleCount=3000;const particlesGeo=new THREE.BufferGeometry();const particlePos=new Float32Array(particleCount*3);for(let i=0;i<particleCount;i++){const radius=3.5+Math.random()*2.5;const theta=Math.random()*Math.PI*2;const phi=Math.acos(2*Math.random()-1);particlePos[i*3]=radius*Math.sin(phi)*Math.cos(theta);particlePos[i*3+1]=radius*Math.sin(phi)*Math.sin(theta)*0.8;particlePos[i*3+2]=radius*Math.cos(phi);}
-particlesGeo.setAttribute('position',new THREE.BufferAttribute(particlePos,3));const particleMat=new THREE.PointsMaterial({color:0xD4A574,size:0.045,transparent:true,opacity:0.35});const particleCloud=new THREE.Points(particlesGeo,particleMat);scene.add(particleCloud);
+particlesGeo.setAttribute('position',new THREE.BufferAttribute(particlePos,3));const particleMat=new THREE.PointsMaterial({color:0x00B4D8,size:0.045,transparent:true,opacity:0.35});const particleCloud=new THREE.Points(particlesGeo,particleMat);scene.add(particleCloud);
 let timeVal=0;
 function animate3d(){requestAnimationFrame(animate3d);timeVal+=0.01;mainSphere.rotation.y=timeVal*0.18;mainSphere.rotation.x=Math.sin(timeVal*0.12)*0.08;core.rotation.y=timeVal*0.45;rings.forEach((ring,idx)=>{ring.rotation.z=timeVal*(0.08+idx*0.04);ring.rotation.x=Math.sin(timeVal*0.15)*0.2+Math.PI/2+idx*0.1;});satellites.forEach(sat=>{sat.angle+=0.01*sat.speed;sat.mesh.position.x=Math.cos(sat.angle)*sat.radius;sat.mesh.position.z=Math.sin(sat.angle)*sat.radius;sat.mesh.position.y=Math.sin(sat.angle*sat.ySpeed)*0.7;});particleCloud.rotation.y=timeVal*0.025;light1.intensity=0.7+Math.sin(timeVal*1.5)*0.25;camera.position.x+=(Math.sin(timeVal*0.2)*0.08-camera.position.x)*0.03;camera.position.y+=(Math.sin(timeVal*0.25)*0.05-camera.position.y)*0.03;camera.lookAt(0,0,0);renderer.render(scene,camera);}
 animate3d();window.addEventListener('resize',()=>{w=window.innerWidth;h=window.innerHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();});
