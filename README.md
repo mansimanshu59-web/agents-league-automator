@@ -104,3 +104,25 @@ _ _ _
 Agents League 2026 - Reasoning Track
 
 ---
+
+## 🎨 Adaptive Theme System (Dynamic UI)
+
+The interface **automatically changes colour** based on threat level detected by the backend agent:
+
+| Threat Level | Theme | Screenshot | Command Example |
+|--------------|-------|------------|-----------------|
+| **0-30% (Normal)** | 🔵 Sky Blue | ![Normal Theme](assets/theme-normal.jpg) | `hello world` |
+| **30-70% (Warning)** | 🟡 Amber/Gold | ![Warning Theme](assets/theme-warning.jpg) | `scan vulnerabilities` |
+| **70%+ (Critical/Blocked)** | 🔴 Red | ![Critical Theme](assets/theme-critical.png) | `rm -rf /` |
+
+### What changes with theme:
+- 🔵 **Main Sphere** - 3D sphere colour changes
+- 🪐 **6 Rotating Rings** - All rings change colour
+- ✨ **100 Orbiting Satellites** - Small spheres change colour
+- 💫 **3000 Particle Cloud** - Floating particles change colour
+- 📝 **All Text Elements** - Headings, labels, buttons change colour
+- 🖱️ **Custom Cursor** - Glow and core change colour
+- 🎨 **Background Gradient** - Smooth transition between themes
+
+### Why this matters:
+This **dynamic semantic theming** provides instant visual feedback to users about the security state of their commands - Blue for safe, Amber for caution, Red for blocked/critical actions.
