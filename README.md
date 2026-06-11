@@ -16,17 +16,27 @@ The agent processes user prompts through a strict zero-trust ingestion pipeline 
 
 ---
 
-### 🖥️ High-Fidelity Command Interface
-![Secure-IQ Dashboard](assets/Screenshot_2026_0611_092606.png)
+## 🎨 Adaptive Theme System (Dynamic UI)
 
-**Features:**
-- 🎨 Creamy premium UI theme
-- ✨ 3D animated sphere with rotating rings
-- 🖱️ Custom cursor with touch ripple effects
-- 📊 Real-time threat scoring & pipeline visualization
-- 🔒 Zero-trust security layer
+The interface **automatically changes colour** based on threat level detected by the backend agent:
 
----
+| Threat Level | Theme | Screenshot | Command Example |
+|--------------|-------|------------|-----------------|
+| **0-30% (Normal)** | 🔵 Sky Blue | ![Normal Theme](assets/theme-normal.jpg) | `hello world` |
+| **30-70% (Warning)** | 🟡 Amber/Gold | ![Warning Theme](assets/theme-warning.jpg) | `scan vulnerabilities` |
+| **70%+ (Critical/Blocked)** | 🔴 Red | ![Critical Theme](assets/theme-critical.png) | `rm -rf /` |
+
+### What changes with theme:
+- 🔵 **Main Sphere** - 3D sphere colour changes
+- 🪐 **6 Rotating Rings** - All rings change colour
+- ✨ **100 Orbiting Satellites** - Small spheres change colour
+- 💫 **3000 Particle Cloud** - Floating particles change colour
+- 📝 **All Text Elements** - Headings, labels, buttons change colour
+- 🖱️ **Custom Cursor** - Glow and core change colour
+- 🎨 **Background Gradient** - Smooth transition between themes
+
+### Why this matters:
+This **dynamic semantic theming** provides instant visual feedback to users about the security state of their commands - Blue for safe, Amber for caution, Red for blocked/critical actions.
 
 ## 🛡️ Security & Compliance
 Our agent utilizes a Zero-Trust Sanitization Layer to protect against malicious injections.
@@ -83,46 +93,12 @@ http://localhost:5000
 
 ---
 
-
-📱 Test Commands
-
-Command Expected Result
-scan vulnerabilities ✅ Security scan initiated (30% threat)
-patch system ✅ Patches deployed successfully
-rm -rf / 🛑 BLOCKED (95% threat - CRITICAL)
-sudo delete all 🛑 BLOCKED (75% threat - HIGH RISK)
-
----
-
 *NOTE*
 Microsoft Foundry IQ SDK integration is prepared but pending Azure credential provisioning.
 Current implementation demonstrates the full Foundry IQ architecture pattern locally.
-_ _ _
 
 👨‍💻 Author
 
 Agents League 2026 - Reasoning Track
 
 ---
-
-## 🎨 Adaptive Theme System (Dynamic UI)
-
-The interface **automatically changes colour** based on threat level detected by the backend agent:
-
-| Threat Level | Theme | Screenshot | Command Example |
-|--------------|-------|------------|-----------------|
-| **0-30% (Normal)** | 🔵 Sky Blue | ![Normal Theme](assets/theme-normal.jpg) | `hello world` |
-| **30-70% (Warning)** | 🟡 Amber/Gold | ![Warning Theme](assets/theme-warning.jpg) | `scan vulnerabilities` |
-| **70%+ (Critical/Blocked)** | 🔴 Red | ![Critical Theme](assets/theme-critical.png) | `rm -rf /` |
-
-### What changes with theme:
-- 🔵 **Main Sphere** - 3D sphere colour changes
-- 🪐 **6 Rotating Rings** - All rings change colour
-- ✨ **100 Orbiting Satellites** - Small spheres change colour
-- 💫 **3000 Particle Cloud** - Floating particles change colour
-- 📝 **All Text Elements** - Headings, labels, buttons change colour
-- 🖱️ **Custom Cursor** - Glow and core change colour
-- 🎨 **Background Gradient** - Smooth transition between themes
-
-### Why this matters:
-This **dynamic semantic theming** provides instant visual feedback to users about the security state of their commands - Blue for safe, Amber for caution, Red for blocked/critical actions.
