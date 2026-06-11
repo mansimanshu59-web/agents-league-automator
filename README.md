@@ -104,10 +104,3 @@ _ _ _
 Agents League 2026 - Reasoning Track
 
 ---
-
-👨‍💻 Author
-
-Agents League 2026 - Reasoning Track
-
----
-
